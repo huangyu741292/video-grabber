@@ -16,6 +16,12 @@
 - **去掉安装欢迎页**：`js/background.js` 的 `onInstalled` 不再打开欢迎页，并删除 `install.html`、`js/install.js`、`css/install.css`。免责声明和隐私说明移到 `README.md`。
 - **文档和仓库配置**：重写 `README.md`，删除上游的多语言 README、赞助配置和 Issue 模板。
 
+## 2026-11-09
+
+- **版本号**：`manifest.json` 和 `manifest.firefox.json` 的版本号从上游的 2.7.2 改为 1.0.0，本项目的版本号从此独立编号。
+- **发布包**：在 GitHub Release 提供 `video-grabber-1.0.0.zip`，解压即可加载。
+- **README**：改为居中标题加徽章的排版，新增功能清单、工作原理图、更新重点和赞赏码。
+
 ## 继续修改
 
 继续修改或分发本项目时请遵守 GPL-3.0：保留原始版权和许可声明，公开修改后的源码，并在本文件追加改动记录。
