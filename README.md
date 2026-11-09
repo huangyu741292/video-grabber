@@ -74,6 +74,18 @@
 - [StreamSaver.js](https://github.com/jimmywarting/StreamSaver.js)
 - [MQTT.js](https://github.com/mqttjs/MQTT.js)
 
+## 赞赏
+
+如果这个工具帮到了你，欢迎请作者喝杯咖啡。赞赏完全自愿，不赞赏也能使用全部功能。
+
+赞赏归本项目维护者所有。如果想支持猫抓原作者，请前往 [cat-catch](https://github.com/xifangczy/cat-catch) 仓库。
+
+<p>
+  <img src="README/alipay.jpg" alt="支付宝收款码" height="260">
+  &nbsp;&nbsp;
+  <img src="README/wechat.jpg" alt="微信赞赏码" height="260">
+</p>
+
 ## 许可证
 
 [GPL-3.0](LICENSE)，与猫抓相同。相对上游的改动见 [FORK.md](FORK.md)。
@@ -83,3 +95,5 @@
 Video Grabber is a browser extension that lists the video and audio resources a page loads and downloads them. Each entry shows its own thumbnail, which enlarges on hover, so you can tell which video is which.
 
 It is a modified version of [cat-catch](https://github.com/xifangczy/cat-catch) and is not an official release of that project. To install, load this folder as an unpacked extension from `chrome://extensions` with Developer mode on. Only download videos you own or are authorized to download. Licensed under GPL-3.0.
+
+If you find it useful, you can support the maintainer through Alipay or WeChat using the QR codes in the 赞赏 section above. Donations go to this project's maintainer, not to the cat-catch author.
