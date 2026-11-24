@@ -16,11 +16,11 @@
 [![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-7c3aed?style=flat-square&labelColor=171a21)](LICENSE)
 [![Latest release](https://img.shields.io/github/v/release/huangyu741292/video-grabber?style=flat-square&labelColor=171a21&color=7c3aed)](https://github.com/huangyu741292/video-grabber/releases/latest)
 [![GitHub downloads](https://img.shields.io/github/downloads/huangyu741292/video-grabber/total?style=flat-square&labelColor=171a21&color=7c3aed)](https://github.com/huangyu741292/video-grabber/releases)
-[![Download size](https://img.shields.io/badge/size-657%20KB-7c3aed?style=flat-square&labelColor=171a21)](https://github.com/huangyu741292/video-grabber/releases/latest)
+[![Download size](https://img.shields.io/badge/size-641%20KB-7c3aed?style=flat-square&labelColor=171a21)](https://github.com/huangyu741292/video-grabber/releases/latest)
 [![Chrome 104+](https://img.shields.io/badge/Chrome-104%2B-7c3aed?style=flat-square&labelColor=171a21&logo=googlechrome&logoColor=white)](#下载与安装)
 [![GitHub stars](https://img.shields.io/github/stars/huangyu741292/video-grabber?style=flat-square&labelColor=171a21&color=7c3aed)](https://github.com/huangyu741292/video-grabber/stargazers)
 
-**[下载 1.1.0（657 KB）](https://github.com/huangyu741292/video-grabber/releases/download/v1.1.0/video-grabber-1.1.0.zip) · [安装教程](#下载与安装) · [功能清单](#全部功能清单) · [问题反馈](https://github.com/huangyu741292/video-grabber/issues)**
+**[下载 1.1.0（641 KB）](https://github.com/huangyu741292/video-grabber/releases/download/v1.1.0/video-grabber-1.1.0.zip) · [安装教程](#下载与安装) · [功能清单](#全部功能清单) · [问题反馈](https://github.com/huangyu741292/video-grabber/issues)**
 
 </div>
 
@@ -59,7 +59,7 @@
 
 | 下载方式 | 文件 | 大小 |
 | --- | --- | --- |
-| GitHub Release（推荐） | [video-grabber-1.1.0.zip](https://github.com/huangyu741292/video-grabber/releases/download/v1.1.0/video-grabber-1.1.0.zip) | 657 KB，解压后约 2.2 MB |
+| GitHub Release（推荐） | [video-grabber-1.1.0.zip](https://github.com/huangyu741292/video-grabber/releases/download/v1.1.0/video-grabber-1.1.0.zip) | 641 KB，解压后约 2.1 MB |
 | 历史版本 | [全部发布](https://github.com/huangyu741292/video-grabber/releases) | — |
 | 源码 | `git clone https://github.com/huangyu741292/video-grabber.git` | 源码文件约 2.6 MB |
 
@@ -173,7 +173,7 @@ It is a modified version of [cat-catch](https://github.com/xifangczy/cat-catch) 
 
 Since 1.1.0 it can also record FLV live streams: it keeps pulling the stream, reconnects automatically, and saves H.264/H.265 + AAC to MP4 without re-encoding (other codecs are saved as FLV), with optional automatic splitting by duration.
 
-**Install:** download [video-grabber-1.1.0.zip](https://github.com/huangyu741292/video-grabber/releases/download/v1.1.0/video-grabber-1.1.0.zip) (657 KB), unzip it to a permanent folder, open `chrome://extensions`, turn on Developer mode, and load the unzipped folder. Chrome 104 or later is recommended.
+**Install:** download [video-grabber-1.1.0.zip](https://github.com/huangyu741292/video-grabber/releases/download/v1.1.0/video-grabber-1.1.0.zip) (641 KB), unzip it to a permanent folder, open `chrome://extensions`, turn on Developer mode, and load the unzipped folder. Chrome 104 or later is recommended.
 
 Only download videos you own or are authorized to download. If you find it useful, you can support the maintainer through Alipay or WeChat using the QR codes in the 赞赏 section above. Donations go to this project's maintainer, not to the cat-catch author. Licensed under GPL-3.0.
 
