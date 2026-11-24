@@ -1054,5 +1054,133 @@
   },
   "groupTime": {
     "message": "Group Time"
+  },
+  "recLiveHeading": {
+    "message": "Record live"
+  },
+  "recordLiveTitle": {
+    "message": "Video Grabber Live Recorder"
+  },
+  "recordLiveTip": {
+    "message": "Record this live stream continuously, stop anytime and save as MP4"
+  },
+  "recUrlPlaceholder": {
+    "message": "FLV live stream URL"
+  },
+  "recStart": {
+    "message": "Start recording"
+  },
+  "recConnecting": {
+    "message": "Connecting…"
+  },
+  "recRecording": {
+    "message": "Recording"
+  },
+  "recReconnecting": {
+    "message": "Disconnected. Reconnecting in $sec$s (attempt $n$)",
+    "placeholders": {
+      "sec": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "recFinishing": {
+    "message": "Creating the file…"
+  },
+  "recStopped": {
+    "message": "Stopped. The recording has been saved."
+  },
+  "recEnded": {
+    "message": "The stream ended or can't be reached. The recording was saved automatically."
+  },
+  "recNoData": {
+    "message": "Nothing was recorded."
+  },
+  "recNotFlv": {
+    "message": "This URL didn't return FLV data."
+  },
+  "recHttpError": {
+    "message": "Server returned $code$",
+    "placeholders": {
+      "code": {
+        "content": "$1"
+      }
+    }
+  },
+  "recDuration": {
+    "message": "Recorded"
+  },
+  "recSize": {
+    "message": "Size"
+  },
+  "recBitrate": {
+    "message": "Bitrate"
+  },
+  "recVideo": {
+    "message": "Video"
+  },
+  "recAudio": {
+    "message": "Audio"
+  },
+  "recFormat": {
+    "message": "Saved as"
+  },
+  "recFormatFlv": {
+    "message": "FLV ($codec$ can't be put into MP4)",
+    "placeholders": {
+      "codec": {
+        "content": "$1"
+      }
+    }
+  },
+  "recReconnects": {
+    "message": "Reconnects"
+  },
+  "recStopSave": {
+    "message": "Stop and save"
+  },
+  "recSavePart": {
+    "message": "Save so far and keep recording"
+  },
+  "recAutoSplit": {
+    "message": "Auto split"
+  },
+  "recSplitOff": {
+    "message": "Off"
+  },
+  "recSplitMinutes": {
+    "message": "Every $min$ min",
+    "placeholders": {
+      "min": {
+        "content": "$1"
+      }
+    }
+  },
+  "recAutoReconnect": {
+    "message": "Reconnect automatically"
+  },
+  "recKeepFlv": {
+    "message": "Also save the original FLV (applies to the next recording)"
+  },
+  "recSavedFiles": {
+    "message": "Saved files"
+  },
+  "recSaving": {
+    "message": "Saving"
+  },
+  "recSaved": {
+    "message": "Saved"
+  },
+  "recSaveFailed": {
+    "message": "Save failed"
+  },
+  "recKeepOpen": {
+    "message": "Keep this page open while recording. Closing it loses anything not yet saved. With auto split on, each part is saved as soon as it ends."
+  },
+  "recLiveBadge": {
+    "message": "LIVE"
   }
 }

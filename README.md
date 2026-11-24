@@ -11,16 +11,16 @@
 **开源、免费的浏览器视频嗅探与下载扩展。**<br>
 列出网页加载的视频和音频，每条都带自己的画面缩略图，看图就知道该下哪一条。
 
-**1.0.0 · 画面缩略图 · m3u8 合并成 MP4 · 自动带上防盗链请求头**
+**1.1.0 · 画面缩略图 · 录制 FLV 直播 · m3u8 合并成 MP4 · 自动带上防盗链请求头**
 
 [![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-7c3aed?style=flat-square&labelColor=171a21)](LICENSE)
 [![Latest release](https://img.shields.io/github/v/release/huangyu741292/video-grabber?style=flat-square&labelColor=171a21&color=7c3aed)](https://github.com/huangyu741292/video-grabber/releases/latest)
 [![GitHub downloads](https://img.shields.io/github/downloads/huangyu741292/video-grabber/total?style=flat-square&labelColor=171a21&color=7c3aed)](https://github.com/huangyu741292/video-grabber/releases)
-[![Download size](https://img.shields.io/badge/size-633%20KB-7c3aed?style=flat-square&labelColor=171a21)](https://github.com/huangyu741292/video-grabber/releases/latest)
+[![Download size](https://img.shields.io/badge/size-641%20KB-7c3aed?style=flat-square&labelColor=171a21)](https://github.com/huangyu741292/video-grabber/releases/latest)
 [![Chrome 104+](https://img.shields.io/badge/Chrome-104%2B-7c3aed?style=flat-square&labelColor=171a21&logo=googlechrome&logoColor=white)](#下载与安装)
 [![GitHub stars](https://img.shields.io/github/stars/huangyu741292/video-grabber?style=flat-square&labelColor=171a21&color=7c3aed)](https://github.com/huangyu741292/video-grabber/stargazers)
 
-**[下载 1.0.0（633 KB）](https://github.com/huangyu741292/video-grabber/releases/download/v1.0.0/video-grabber-1.0.0.zip) · [安装教程](#下载与安装) · [功能清单](#全部功能清单) · [问题反馈](https://github.com/huangyu741292/video-grabber/issues)**
+**[下载 1.1.0（641 KB）](https://github.com/huangyu741292/video-grabber/releases/download/v1.1.0/video-grabber-1.1.0.zip) · [安装教程](#下载与安装) · [功能清单](#全部功能清单) · [问题反馈](https://github.com/huangyu741292/video-grabber/issues)**
 
 </div>
 
@@ -43,6 +43,7 @@
 - **悬停放大**：鼠标移到缩略图上，放大显示画面，并标出时长和分辨率。
 - **音频单独标记**：没有画面的文件标「♪ 音频」，方便找到和画面配对的声音。
 - **m3u8 下载合并**：解析 HLS 播放列表，多线程下载分片，合并转成 MP4，支持 AES-128 解密和录制直播。
+- **录制 FLV 直播**：抖音、快手等网页直播常用 FLV 流。点红色的录制按钮就能一直录，断线会自动重连，随时停止，停止后直接存成 MP4。不重新编码，画质不变。录得久可以按时长自动分段保存。FLV 直播条目也会显示直播画面缩略图。
 - **带上防盗链请求头**：嗅探时记下网页原本的 Referer、Cookie，下载和生成缩略图时自动带上，避免被网站拦截。
 
 ## 使用前请了解
@@ -58,15 +59,15 @@
 
 | 下载方式 | 文件 | 大小 |
 | --- | --- | --- |
-| GitHub Release（推荐） | [video-grabber-1.0.0.zip](https://github.com/huangyu741292/video-grabber/releases/download/v1.0.0/video-grabber-1.0.0.zip) | 633 KB，解压后约 2.3 MB |
+| GitHub Release（推荐） | [video-grabber-1.1.0.zip](https://github.com/huangyu741292/video-grabber/releases/download/v1.1.0/video-grabber-1.1.0.zip) | 641 KB，解压后约 2.2 MB |
 | 历史版本 | [全部发布](https://github.com/huangyu741292/video-grabber/releases) | — |
 | 源码 | `git clone https://github.com/huangyu741292/video-grabber.git` | 源码文件约 2.6 MB |
 
 1. 下载 zip，解压到一个固定的文件夹。之后不要移动或删除这个文件夹，否则扩展会失效。
 2. 打开 `chrome://extensions`，打开右上角的「开发者模式」。
-3. 点「加载已解压的扩展程序」，选择解压出来的 `video-grabber-1.0.0` 文件夹。
+3. 点「加载已解压的扩展程序」，选择解压出来的 `video-grabber-1.1.0` 文件夹。
 4. 点工具栏的拼图图标，把紫色的视频抓取器图标固定出来。
-5. 打开有视频的网页并开始播放，点图标查看抓到的资源。根据缩略图、时长和大小找到要的那一条，点下载。m3u8 资源会打开解析器页面，完成下载和合并。
+5. 打开有视频的网页并开始播放，点图标查看抓到的资源。根据缩略图、时长和大小找到要的那一条，点下载。m3u8 资源会打开解析器页面，完成下载和合并。FLV 直播点红色的录制按钮，会打开录制页面。录制期间要保持这个页面开着，停止后文件会存进浏览器的下载目录。
 
 **升级方法**：把新版解压后覆盖到原来的文件夹，再到 `chrome://extensions` 点扩展卡片上的刷新按钮。换了文件夹位置的话，扩展 ID 会变，之前的设置不会带过来。
 
@@ -82,6 +83,7 @@
 | **M3U8 解析器** | 多线程下载；AES-128 解密，自动寻找疑似密钥；选择下载范围；录制直播；边下边存；只要音频；转成 MP4；重下失败项。 |
 | **MPD 解析器** | 解析 DASH，分别选择视频和音频，可转为 m3u8 解析。 |
 | **媒体控制** | 倍速播放、画中画、全屏、截图、循环、静音。 |
+| **直播录制** | ★ FLV 直播持续录制；★ 断线自动重连；★ 停止后不重新编码直接存成 MP4，支持 H.264、H.265 加 AAC，其他编码自动存成 FLV；★ 按时长自动分段；★ 保存已录部分后继续录制；★ FLV 直播画面缩略图。 |
 | **录制** | 视频录制、录制 webRTC、屏幕捕捉。 |
 | **其他** | 模拟手机；在线合并；发送数据到 MQTT 或自定义地址；导出和导入设置；右键菜单；侧边栏；11 种界面语言。 |
 
@@ -94,11 +96,22 @@ flowchart LR
     D -->|"MP4 等直链"| E["带请求头直接下载"]
     D -->|"m3u8"| F["M3U8 解析器<br/>多线程下载、AES-128 解密<br/>转成 MP4"]
     D -->|"mpd"| G["MPD 解析器<br/>选择画面和声音"]
+    D -->|"FLV 直播"| H["★ 录制页面<br/>持续拉流、断线重连<br/>不重新编码存成 MP4"]
 ```
 
 生成缩略图和下载时，扩展会用浏览器的 `declarativeNetRequest` 把记下的请求头带回去，所以有防盗链的网站也能正常加载。
 
-## 1.0.0 更新重点
+## 更新记录
+
+### 1.1.0（2026-11-24）
+
+- **录制 FLV 直播**：抖音、快手等网页直播的 FLV 流可以一直录。列表里的 FLV 条目多了红色录制按钮，没有文件大小的 FLV 直播点下载也会打开录制页面。
+- **断线自动重连**：20 秒没有数据或连接断开会自动重连，连续失败 6 次视为直播结束，自动保存已录内容。
+- **不重新编码存成 MP4**：支持 H.264、H.265 加 AAC，画质不变，生成的 MP4 能直接播放和拖动进度。其他编码自动存成 FLV。
+- **分段保存**：可以按 10、30、60、120 分钟自动分段，也可以随时「保存已录部分」后继续录制。
+- **直播缩略图**：FLV 直播条目显示当前直播画面，并标「直播」。
+
+### 1.0.0（2026-11-09）
 
 - 每条资源显示自己的画面缩略图和时长，悬停放大，纯音频单独标记。
 - 使用独立的名称、紫色图标和扩展 ID，可以和猫抓同时安装。
@@ -158,7 +171,9 @@ Video Grabber is a free, open-source browser extension that lists the video and 
 
 It is a modified version of [cat-catch](https://github.com/xifangczy/cat-catch) and is not an official release of that project. It also inherits cat-catch's HLS (m3u8) downloader with multi-threading, AES-128 decryption and MP4 output, the DASH (mpd) parser, and request-header forwarding for hotlink-protected sites.
 
-**Install:** download [video-grabber-1.0.0.zip](https://github.com/huangyu741292/video-grabber/releases/download/v1.0.0/video-grabber-1.0.0.zip) (633 KB), unzip it to a permanent folder, open `chrome://extensions`, turn on Developer mode, and load the unzipped folder. Chrome 104 or later is recommended.
+Since 1.1.0 it can also record FLV live streams: it keeps pulling the stream, reconnects automatically, and saves H.264/H.265 + AAC to MP4 without re-encoding (other codecs are saved as FLV), with optional automatic splitting by duration.
+
+**Install:** download [video-grabber-1.1.0.zip](https://github.com/huangyu741292/video-grabber/releases/download/v1.1.0/video-grabber-1.1.0.zip) (641 KB), unzip it to a permanent folder, open `chrome://extensions`, turn on Developer mode, and load the unzipped folder. Chrome 104 or later is recommended.
 
 Only download videos you own or are authorized to download. If you find it useful, you can support the maintainer through Alipay or WeChat using the QR codes in the 赞赏 section above. Donations go to this project's maintainer, not to the cat-catch author. Licensed under GPL-3.0.
 

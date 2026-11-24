@@ -1054,5 +1054,133 @@
   },
   "groupTime": {
     "message": "分組時間"
+  },
+  "recLiveHeading": {
+    "message": "錄製直播"
+  },
+  "recordLiveTitle": {
+    "message": "影片抓取器 錄製直播"
+  },
+  "recordLiveTip": {
+    "message": "持續錄製這個直播，隨時停止並儲存為 MP4"
+  },
+  "recUrlPlaceholder": {
+    "message": "FLV 直播網址"
+  },
+  "recStart": {
+    "message": "開始錄製"
+  },
+  "recConnecting": {
+    "message": "正在連線…"
+  },
+  "recRecording": {
+    "message": "錄製中"
+  },
+  "recReconnecting": {
+    "message": "連線中斷，$sec$ 秒後重新連線（第 $n$ 次）",
+    "placeholders": {
+      "sec": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "recFinishing": {
+    "message": "正在產生檔案…"
+  },
+  "recStopped": {
+    "message": "已停止，錄製內容已儲存"
+  },
+  "recEnded": {
+    "message": "直播已結束或無法連線，錄製內容已自動儲存"
+  },
+  "recNoData": {
+    "message": "沒有錄到內容"
+  },
+  "recNotFlv": {
+    "message": "這個網址回傳的不是 FLV 資料"
+  },
+  "recHttpError": {
+    "message": "伺服器回傳 $code$",
+    "placeholders": {
+      "code": {
+        "content": "$1"
+      }
+    }
+  },
+  "recDuration": {
+    "message": "已錄時長"
+  },
+  "recSize": {
+    "message": "大小"
+  },
+  "recBitrate": {
+    "message": "位元率"
+  },
+  "recVideo": {
+    "message": "畫面"
+  },
+  "recAudio": {
+    "message": "聲音"
+  },
+  "recFormat": {
+    "message": "儲存格式"
+  },
+  "recFormatFlv": {
+    "message": "FLV（$codec$ 無法放進 MP4）",
+    "placeholders": {
+      "codec": {
+        "content": "$1"
+      }
+    }
+  },
+  "recReconnects": {
+    "message": "重新連線次數"
+  },
+  "recStopSave": {
+    "message": "停止並儲存"
+  },
+  "recSavePart": {
+    "message": "儲存已錄部分，繼續錄製"
+  },
+  "recAutoSplit": {
+    "message": "自動分段"
+  },
+  "recSplitOff": {
+    "message": "不分段"
+  },
+  "recSplitMinutes": {
+    "message": "每 $min$ 分鐘",
+    "placeholders": {
+      "min": {
+        "content": "$1"
+      }
+    }
+  },
+  "recAutoReconnect": {
+    "message": "斷線自動重新連線"
+  },
+  "recKeepFlv": {
+    "message": "同時儲存原始 FLV（下次錄製生效）"
+  },
+  "recSavedFiles": {
+    "message": "已儲存的檔案"
+  },
+  "recSaving": {
+    "message": "儲存中"
+  },
+  "recSaved": {
+    "message": "已儲存"
+  },
+  "recSaveFailed": {
+    "message": "儲存失敗"
+  },
+  "recKeepOpen": {
+    "message": "錄製時請保持這個頁面開啟，關閉頁面會遺失尚未儲存的內容。開啟自動分段後，每段錄完會立即儲存。"
+  },
+  "recLiveBadge": {
+    "message": "直播"
   }
 }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>recordLiveTitle</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/options.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/record.css" media="all" />
+    <script src="lib/jquery.min.js"></script>
+    <script src="js/polyfill.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/function.js"></script>
+    <script src="js/flv-mp4.js"></script>
+</head>
+
+<body>
+    <div class="wrapper1024">
+        <section>
+            <h1 class="optionsTitle"><span class="recTitleDot"></span><span data-i18n="recLiveHeading"></span></h1>
+
+            <div class="optionBox hide" id="urlForm">
+                <input type="text" id="formUrl" data-i18n-placeholder="recUrlPlaceholder" class="fullInput" />
+                <input type="text" id="formReferer" placeholder="referer" class="fullInput" />
+                <button id="formStart" class="button2" type="button" data-i18n="recStart"></button>
+            </div>
+
+            <div class="optionBox hide" id="recBox">
+                <div class="recName" id="recName"></div>
+                <div class="recUrl" id="recUrl"></div>
+                <div class="recStatus" id="recStatus" data-state="connecting">
+                    <span class="recDot"></span><span id="recStatusText"></span>
+                </div>
+                <div class="recStats">
+                    <div><span data-i18n="recDuration"></span><b id="statDuration">00:00</b></div>
+                    <div><span data-i18n="recSize"></span><b id="statSize">0</b></div>
+                    <div><span data-i18n="recBitrate"></span><b id="statBitrate">-</b></div>
+                    <div><span data-i18n="recVideo"></span><b id="statVideo">-</b></div>
+                    <div><span data-i18n="recAudio"></span><b id="statAudio">-</b></div>
+                    <div><span data-i18n="recFormat"></span><b id="statFormat">-</b></div>
+                    <div><span data-i18n="recReconnects"></span><b id="statReconnects">0</b></div>
+                </div>
+                <div class="recButtons">
+                    <button class="button2" id="stopSave" type="button" data-i18n="recStopSave"></button>
+                    <button id="savePart" type="button" data-i18n="recSavePart"></button>
+                </div>
+                <div class="recOptions">
+                    <label><span data-i18n="recAutoSplit"></span> <select id="autoSplit"></select></label>
+                    <label><input type="checkbox" id="autoReconnect" checked /><span data-i18n="recAutoReconnect"></span></label>
+                    <label><input type="checkbox" id="keepFlv" /><span data-i18n="recKeepFlv"></span></label>
+                </div>
+                <p class="recTip" data-i18n="recKeepOpen"></p>
+            </div>
+        </section>
+
+        <section class="hide" id="savedSection">
+            <h1 class="optionsTitle" data-i18n="recSavedFiles"></h1>
+            <div class="optionBox" id="savedList"></div>
+            <div class="optionBox">
+                <button class="button2" id="openDir" type="button" data-i18n="openDir"></button>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/record.js"></script>
+    <script src="js/i18n.js"></script>
+</body>
+
+</html>

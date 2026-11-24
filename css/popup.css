@@ -354,3 +354,7 @@ label {
   font-size: 11px;
   color: #fff;
 }
+/* FLV 直播的缩略图角标 */
+.panel-heading .thumbBox.live .thumbTime {
+  background: #e53935;
+}

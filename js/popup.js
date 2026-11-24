@@ -127,6 +127,8 @@ function setupThumb(data) {
       img.src = data.url;
       $box.prepend(img);
     };
+  } else if (isFLV(data)) {
+    job.start = function (done) { flvThumb(data, $box, job, done); };
   } else if (isM3U8(data) || data.isPlay) {
     job.start = function (done) {
       const video = document.createElement("video");
@@ -190,6 +192,106 @@ function setupThumb(data) {
     thumbQueue.push(job);
     pumpThumbs();
   }
+}
+
+// FLV 浏览器不能直接播放：拉流到第一个关键帧，用 WebCodecs 解码成一张图（直播流拿到画面就断开）
+const FLV_THUMB_MAX_BYTES = 6 * 1024 * 1024;
+function flvThumb(data, $box, job, done) {
+  const ctrl = new AbortController();
+  let ended = false;
+  const finish = function (ok) {
+    if (ended) return;
+    ended = true;
+    ctrl.abort();
+    if (ok) $box.removeClass("hide");
+    done();
+  };
+  job.abort = function () { finish(false); };
+  if (typeof VideoDecoder === "undefined" || typeof FlvDemuxer === "undefined") { finish(false); return; }
+  let cfg = null, key = null, audio = false, received = 0;
+  const demuxer = new FlvDemuxer(function (type, ts, d) {
+    if (key) return;
+    if (type === 8) { audio = true; return; }
+    if (type !== 9) return;
+    const p = parseFlvVideo(d);
+    if (p.kind === "config" && (p.codec === "avc" || p.codec === "hevc")) {
+      cfg = describeVideoConfig(p.codec, p.data);
+    } else if (p.kind === "frame" && p.key && cfg && p.codec === cfg.codec) {
+      key = p.data.slice();
+    }
+  });
+  fetch(data.url, { signal: ctrl.signal, cache: "no-store" }).then(async function (resp) {
+    if (!resp.ok) throw new Error(resp.status);
+    const reader = resp.body.getReader();
+    while (!key && received < FLV_THUMB_MAX_BYTES) {
+      const { done: end, value } = await reader.read();
+      if (end) break;
+      received += value.length;
+      demuxer.push(value);
+    }
+    ctrl.abort();
+    if (!key) {
+      if (audio && !cfg) {
+        $box.addClass("audioOnly").attr("title", "仅音频");
+        finish(true);
+        return;
+      }
+      throw new Error("no keyframe");
+    }
+    const frame = await decodeFlvKeyframe(cfg, key);
+    const scale = Math.min(1, 640 / frame.displayWidth);
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(frame.displayWidth * scale);
+    canvas.height = Math.round(frame.displayHeight * scale);
+    canvas.getContext("2d").drawImage(frame, 0, 0, canvas.width, canvas.height);
+    const size = `${frame.displayWidth}x${frame.displayHeight}`;
+    frame.close();
+    const img = document.createElement("img");
+    img.src = canvas.toDataURL("image/jpeg", 0.85);
+    $box.prepend(img);
+    const live = !data._size;
+    if (live) $box.addClass("live").find(".thumbTime").text(i18n.recLiveBadge);
+    $box.attr("data-info", [live ? i18n.recLiveBadge : "FLV", cfg.codec === "hevc" ? "H.265" : "H.264", size].join("  "));
+    finish(true);
+  }).catch(function (e) {
+    finish(false);
+  });
+}
+function flvCodecString(cfg) {
+  const c = cfg.config;
+  const hex = function (v) { return v.toString(16).padStart(2, "0"); };
+  if (cfg.codec === "avc") return "avc1." + hex(c[1]) + hex(c[2]) + hex(c[3]);
+  // hvc1.<space><profile>.<compat 反转位序>.<L|H><level>.<constraint...>
+  const space = ["", "A", "B", "C"][c[1] >> 6];
+  const tier = (c[1] >> 5) & 1 ? "H" : "L";
+  const profile = c[1] & 0x1f;
+  let compat = ((c[2] << 24) | (c[3] << 16) | (c[4] << 8) | c[5]) >>> 0;
+  let rev = 0;
+  for (let i = 0; i < 32; i++) { rev = (rev << 1) | (compat & 1); compat >>>= 1; }
+  const cons = Array.from(c.subarray(6, 12));
+  while (cons.length && cons[cons.length - 1] === 0) cons.pop();
+  return ["hvc1", space + profile, (rev >>> 0).toString(16), tier + c[12]].concat(cons.map(function (b) { return b.toString(16).toUpperCase(); })).join(".");
+}
+function decodeFlvKeyframe(cfg, keyData) {
+  return new Promise(function (resolve, reject) {
+    let got = false;
+    const decoder = new VideoDecoder({
+      output: function (frame) {
+        if (got) { frame.close(); return; }
+        got = true;
+        resolve(frame);
+        setTimeout(function () { try { decoder.close(); } catch (e) { } });
+      },
+      error: reject
+    });
+    try {
+      decoder.configure({ codec: flvCodecString(cfg), description: cfg.config, optimizeForLatency: true });
+      decoder.decode(new EncodedVideoChunk({ type: "key", timestamp: 0, data: keyData }));
+      decoder.flush().then(function () { if (!got) reject(new Error("no frame")); }, reject);
+    } catch (e) {
+      reject(e);
+    }
+  });
 }
 
 // 悬停放大：把缩略图里的画面临时改为 fixed 定位浮在列表外（不移动 DOM，画面不会重新加载）
@@ -279,6 +381,7 @@ function AddMedia(data, currentTab = true) {
                 <img src="img/parsing.png" class="icon parsing ${data.parsing ? "" : "hide"}" id="parsing" data-type="${data.parsing}" title="${i18n.parser}"/>
                 <img src="img/play.png" class="icon play ${data.isPlay ? "" : "hide"}" id="play" title="${i18n.preview}"/>
                 <img src="img/download.svg" class="icon download" id="download" title="${i18n.download}"/>
+                <img src="img/record.svg" class="icon record ${isFLV(data) ? "" : "hide"}" id="record" title="${i18n.recordLiveTip}"/>
                 <img src="img/aria2.png" class="icon aria2 ${G.enableAria2Rpc ? "" : "hide"}"" id="aria2" title="Aria2"/>
                 <img src="img/invoke.svg" class="icon invoke ${G.invoke ? "" : "hide"}"" id="invoke" title="${i18n.invoke}"/>
                 <img src="img/send.svg" class="icon send ${G.send2localManual || G.send2local ? "" : "hide"}"" id="send2local" title="${i18n.send2local}"/>
@@ -485,11 +588,21 @@ function AddMedia(data, currentTab = true) {
       openParser(data, { autoDown: true });
       return false;
     }
+    // 没有文件大小的 FLV 是直播流，交给浏览器下载永远下不完，改用录制页面
+    if (isFLV(data) && !data._size) {
+      openRecorder(data);
+      return false;
+    }
     chrome.downloads.download({
       url: data.url,
       filename: data.downFileName,
       saveAs: G.saveAs
     }, function (id) { downData[id] = data; });
+    return false;
+  });
+  // 录制 FLV 直播
+  data.html.find('#record').click(function () {
+    openRecorder(data);
     return false;
   });
   // 调用
@@ -726,6 +839,11 @@ $('#DownFile').click(function () {
     }
     if (G.m3u8AutoDown && data.parsing == "m3u8") {
       openParser(data, { autoDown: true, autoClose: true });
+      continue;
+    }
+    // FLV 直播交给录制页面
+    if (isFLV(data) && !data._size) {
+      openRecorder(data);
       continue;
     }
     // 以防止popup页面被关闭 丢失下载数据 批量下载前临时修改为 后台下载
@@ -1226,6 +1344,23 @@ function isPlay(data) {
   if (G.Player && !isJSON(data) && !isPicture(data)) { return true; }
   const typeArray = ['video/ogg', 'video/mp4', 'video/webm', 'audio/ogg', 'audio/mp3', 'audio/wav', 'audio/m4a', 'video/3gp', 'video/mpeg', 'video/mov'];
   return isMediaExt(data.ext) || typeArray.includes(data.type) || isM3U8(data);
+}
+
+function isFLV(data) {
+  return data.ext == "flv" || /flv/i.test(data.type || "");
+}
+
+// 打开 FLV 直播录制页面
+function openRecorder(data) {
+  localStorage.setItem("recordData", JSON.stringify(trimData(data)));
+  const url = `/record.html?${new URLSearchParams({ requestId: data.requestId })}`;
+  chrome.tabs.get(G.tabId, function (tab) {
+    if (chrome.runtime.lastError || !tab) {
+      chrome.tabs.create({ url });
+      return;
+    }
+    chrome.tabs.create({ url, index: tab.index + 1 });
+  });
 }
 
 // 猫抓下载器

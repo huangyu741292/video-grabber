@@ -90,5 +90,5 @@
     "extension_pages": "script-src 'self'; object-src 'self'"
   },
   "default_locale": "en",
-  "version": "1.0.0"
+  "version": "1.1.0"
 }
